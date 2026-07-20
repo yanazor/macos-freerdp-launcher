@@ -20,24 +20,65 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
+      - name: Install ShellCheck
+        run: brew install shellcheck
+
       - name: Check shell syntax
         shell: bash
         run: |
+          found=0
+
           while IFS= read -r -d '' file; do
-            echo "Checking $file"
+            found=1
+            echo "Checking syntax: $file"
             bash -n "$file"
           done < <(
             find . -type f \
               \( -name '*.sh' -o -name '*.command' \) \
+              -not -path './.git/*' \
               -print0
           )
+
+          if [[ "$found" -eq 0 ]]; then
+            echo "No shell scripts found."
+          fi
+
+      - name: Run ShellCheck
+        shell: bash
+        run: |
+          found=0
+
+          while IFS= read -r -d '' file; do
+            found=1
+            echo "Running ShellCheck: $file"
+            shellcheck "$file"
+          done < <(
+            find . -type f \
+              \( -name '*.sh' -o -name '*.command' \) \
+              -not -path './.git/*' \
+              -print0
+          )
+
+          if [[ "$found" -eq 0 ]]; then
+            echo "No shell scripts found."
+          fi
 
       - name: Validate property lists
         shell: bash
         run: |
+          found=0
+
           while IFS= read -r -d '' file; do
-            echo "Checking $file"
+            found=1
+            echo "Checking property list: $file"
             plutil -lint "$file"
           done < <(
-            find . -type f -name 'Info.plist' -print0
+            find . -type f \
+              -name 'Info.plist' \
+              -not -path './.git/*' \
+              -print0
           )
+
+          if [[ "$found" -eq 0 ]]; then
+            echo "No property lists found."
+          fi
