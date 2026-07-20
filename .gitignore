@@ -1,0 +1,10 @@
+.DS_Store
+config.sh
+*.log
+*.swp
+*.tmp
+.env
+secrets/
+private/
+*.key
+*.key.pem

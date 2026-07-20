@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Copy this file to config.sh and edit the values.
+# config.sh is intentionally ignored by Git.
+
+APP_NAME="FreeRDP Launcher"
+APP_BUNDLE_ID="local.example.freerdp-launcher"
+
+RDP_HOST="rdp.example.internal"
+RDP_PORT="3389"
+RDP_USER="admin"
+
+# These values identify the existing generic-password entry in macOS Keychain.
+KEYCHAIN_ACCOUNT="admin"
+KEYCHAIN_SERVICE="FreeRDP Launcher RDP"
+
+# Local folder exposed to the remote session.
+SHARE_DIR="$HOME/RDP-Share"
+SHARE_NAME="RDPShare"
+
+# US English keyboard layout. Change when required.
+KEYBOARD_LAYOUT="0x00000409"
+
+# Safer public-project default than /cert:ignore.
+# Examples supported by many FreeRDP 3 builds include /cert:tofu and /cert:ignore.
+CERTIFICATE_ARGUMENT="/cert:tofu"
+
+# Install locations.
+SUPPORT_DIR="$HOME/Library/Application Support/FreeRDP Launcher"
+APP_INSTALL_DIR="$HOME/Applications"
+CREATE_DESKTOP_APP_SHORTCUT="true"
+CREATE_DESKTOP_SHARE_SHORTCUT="true"
+
+# Add or remove FreeRDP arguments for your environment.
+EXTRA_FREERDP_ARGS=(
+  "/dynamic-resolution"
+  "/clipboard:direction-to:all"
+)
