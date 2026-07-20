@@ -1,5 +1,8 @@
 # macOS FreeRDP Launcher
 
+[![macOS checks](https://github.com/yanazor/macos-freerdp-launcher/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/yanazor/macos-freerdp-launcher/actions/workflows/checks.yml)
+
+
 A small macOS application bundle that launches an SDL FreeRDP session to any reachable RDP host while keeping the RDP password in macOS Keychain.
 
 ## Features
